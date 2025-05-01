@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plato Calendar</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2d3e50;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .calendar {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .calendar-header button {
+      background: #2d3e50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .calendar-header h2 {
+      margin: 0;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .day {
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f9fafc;
+    }
+
+    .today {
+      background: #d1e7dd;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Plato Calendar</h1>
+  </header>
+
+  <div class="calendar">
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">이전</button>
+      <h2 id="monthYear"></h2>
+      <button onclick="changeMonth(1)">다음</button>
+    </div>
+    <div class="calendar-grid" id="calendarDays"></div>
+  </div>
+
+  <script>
+    const calendarDays = document.getElementById("calendarDays");
+    const monthYear = document.getElementById("monthYear");
+
+    let currentDate = new Date();
+
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const today = new Date();
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      monthYear.textContent = `${year}년 ${month + 1}월`;
+
+      calendarDays.innerHTML = "";
+
+      const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+      for (let day of dayNames) {
+        const dayElem = document.createElement("div");
+        dayElem.textContent = day;
+        dayElem.style.fontWeight = "bold";
+        calendarDays.appendChild(dayElem);
+      }
+
+      for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement("div");
+        calendarDays.appendChild(emptyCell);
+      }
+
+      for (let i = 1; i <= daysInMonth; i++) {
+        const dayElem = document.createElement("div");
+        dayElem.className = "day";
+        dayElem.textContent = i;
+
+        if (
+          today.getDate() === i &&
+          today.getMonth() === month &&
+          today.getFullYear() === year
+        ) {
+          dayElem.classList.add("today");
+        }
+
+        calendarDays.appendChild(dayElem);
+      }
+    }
+
+    function changeMonth(offset) {
+      currentDate.setMonth(currentDate.getMonth() + offset);
+      renderCalendar(currentDate);
+    }
+
+    renderCalendar(currentDate);
+  </script>
+</body>
+</html>
