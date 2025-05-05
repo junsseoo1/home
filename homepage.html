@@ -1,148 +1,137 @@
 <!DOCTYPE html>
-
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Plato Calendar</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: #f4f6f8;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
+      background: #f9f9f9;
+      color: #333;
     }
 
     header {
-      background: #2d3e50;
+      background: #4a90e2;
       color: white;
-      padding: 1rem 2rem;
+      padding: 2rem 1rem;
       text-align: center;
     }
 
-    h1 {
+    header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
 
-    .calendar {
-      max-width: 800px;
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .container {
+      max-width: 900px;
       margin: 2rem auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
+      padding: 0 1rem;
     }
 
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .calendar-header button {
-      background: #2d3e50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .calendar-header h2 {
-      margin: 0;
-    }
-
-    .calendar-grid {
+    .features {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 0.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .feature h3 {
+      margin-top: 0;
+    }
+
+    .screenshots {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .screenshots img {
+      width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    .download {
       text-align: center;
+      margin-top: 3rem;
     }
 
-    .day {
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: #f9fafc;
+    .download a {
+      display: inline-block;
+      background: #4a90e2;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1rem;
     }
 
-    .today {
-      background: #d1e7dd;
-      font-weight: bold;
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #777;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Plato Calendar</h1>
+    <p>당신의 학교 생활을 정리해주는 스마트 시간표 캘린더</p>
   </header>
 
-  <div class="calendar">
-    <div class="calendar-header">
-      <button onclick="changeMonth(-1)">이전</button>
-      <h2 id="monthYear"></h2>
-      <button onclick="changeMonth(1)">다음</button>
+  <div class="container">
+    <section class="features">
+      <div class="feature">
+        <h3>학교 캘린더 자동 연동</h3>
+        <p>학교 웹사이트에서 일정 정보를 자동으로 가져와 정리해줍니다.</p>
+      </div>
+      <div class="feature">
+        <h3>iOS 캘린더 연동</h3>
+        <p>Apple Calendar와 통합되어 중요한 일정을 놓치지 않도록 도와줍니다.</p>
+      </div>
+      <div class="feature">
+        <h3>깔끔한 UI</h3>
+        <p>사용자 친화적이고 직관적인 디자인으로 누구나 쉽게 사용할 수 있습니다.</p>
+      </div>
+      <div class="feature">
+        <h3>위젯 지원</h3>
+        <p>홈 화면에서 바로 오늘 일정을 확인할 수 있는 iOS 위젯 기능을 제공합니다.</p>
+      </div>
+    </section>
+
+    <div class="screenshots">
+      <img src="screenshot1.png" alt="Plato Calendar Screenshot 1">
+      <img src="screenshot2.png" alt="Plato Calendar Screenshot 2">
     </div>
-    <div class="calendar-grid" id="calendarDays"></div>
+
+    <div class="download">
+      <h2>지금 다운로드하세요</h2>
+      <a href="https://example.com/download">앱 다운로드</a>
+    </div>
   </div>
 
-  <script>
-    const calendarDays = document.getElementById("calendarDays");
-    const monthYear = document.getElementById("monthYear");
+  <footer>
+    &copy; 2025 Plato Calendar. All rights reserved.
+  </footer>
 
-    let currentDate = new Date();
-
-    function renderCalendar(date) {
-      const year = date.getFullYear();
-      const month = date.getMonth();
-      const today = new Date();
-
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      monthYear.textContent = `${year}년 ${month + 1}월`;
-
-      calendarDays.innerHTML = "";
-
-      const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
-      for (let day of dayNames) {
-        const dayElem = document.createElement("div");
-        dayElem.textContent = day;
-        dayElem.style.fontWeight = "bold";
-        calendarDays.appendChild(dayElem);
-      }
-
-      for (let i = 0; i < firstDay; i++) {
-        const emptyCell = document.createElement("div");
-        calendarDays.appendChild(emptyCell);
-      }
-
-      for (let i = 1; i <= daysInMonth; i++) {
-        const dayElem = document.createElement("div");
-        dayElem.className = "day";
-        dayElem.textContent = i;
-
-        if (
-          today.getDate() === i &&
-          today.getMonth() === month &&
-          today.getFullYear() === year
-        ) {
-          dayElem.classList.add("today");
-        }
-
-        calendarDays.appendChild(dayElem);
-      }
-    }
-
-    function changeMonth(offset) {
-      currentDate.setMonth(currentDate.getMonth() + offset);
-      renderCalendar(currentDate);
-    }
-
-    renderCalendar(currentDate);
-  </script>
 </body>
 </html>
 
