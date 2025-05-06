@@ -36,20 +36,21 @@
       padding: 0 1rem;
     }
 
-    .features {
+    .features, .data-usage {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
+      margin-top: 2rem;
     }
 
-    .feature {
+    .feature, .data-item {
       background: white;
       padding: 1.5rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
-    .feature h3 {
+    .feature h3, .data-item h3 {
       margin-top: 0;
     }
 
@@ -88,6 +89,16 @@
       color: #777;
       font-size: 0.9rem;
     }
+
+    footer a {
+      color: #4a90e2;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -101,19 +112,31 @@
     <section class="features">
       <div class="feature">
         <h3>학교 캘린더 자동 연동</h3>
-        <p>학교 웹사이트에서 일정 정보를 자동으로 가져와 정리해줍니다.</p>
+        <p>부산대학교 학사일정을 자동으로 가져와 사용자의 시간표와 통합하여 관리합니다.</p>
       </div>
       <div class="feature">
         <h3>Google 캘린더 연동</h3>
-        <p>Google Calendar와 통합되어 중요한 일정을 놓치지 않도록 도와줍니다.</p>
+        <p>Google Calendar와 동기화하여 일정을 추가, 수정, 삭제하며 중요한 이벤트를 놓치지 않습니다.</p>
       </div>
       <div class="feature">
         <h3>깔끔한 UI</h3>
-        <p>사용자 친화적이고 직관적인 디자인으로 누구나 쉽게 사용할 수 있습니다.</p>
+        <p>직관적이고 사용자 친화적인 인터페이스로 누구나 쉽게 일정을 관리할 수 있습니다.</p>
       </div>
       <div class="feature">
         <h3>알림 지원</h3>
-        <p>알림센터에서 바로 오늘 일정을 확인할 수 있는 iOS 알림 기능을 제공합니다.</p>
+        <p>iOS 알림센터를 통해 오늘의 일정을 빠르게 확인하고, 중요한 일정에 대한 알림을 받습니다.</p>
+      </div>
+    </section>
+
+    <section class="data-usage">
+      <h2 style="text-align: center;">데이터 사용 투명성</h2>
+      <div class="data-item">
+        <h3>Google Calendar 데이터</h3>
+        <p>Google Calendar 연동 기능을 사용 시, 일정 데이터를 읽고 수정하기 위해 접근 권한을 요청합니다. 모든 데이터는 사용자의 기기 내에서 처리되며 외부로 전송되지 않습니다.</p>
+      </div>
+      <div class="data-item">
+        <h3>앱 성능 데이터</h3>
+        <p>앱의 안정성 향상을 위해 비정상 종료 로그 및 성능 데이터를 수집합니다. 이 데이터는 개인 식별 정보가 포함되지 않으며, 오류 수정 후 즉시 삭제됩니다.</p>
       </div>
     </section>
 
@@ -124,7 +147,10 @@
   </div>
 
   <footer>
-    &copy; 2025 Junseo Lee. All rights reserved.
+    © 2025 Junseo Lee. All rights reserved.<br>
+    <a href="https://junsseoo1.github.io/privacy/">개인정보처리방침</a> | 
+    <a href="https://junsseoo1.github.io/service/">이용약관</a> | 
+    <a href="mailto:dlwd9888@pusan.ac.kr">문의: dlwd9888@pusan.ac.kr</a>
   </footer>
 
 </body>
