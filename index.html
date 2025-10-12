@@ -125,28 +125,52 @@
       animation: fadeInUp 1s ease-out 0.7s both;
     }
 
-    .features {
+    .app-section {
+      margin: 6rem 0;
+    }
+
+    .app-section h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 3rem;
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .app-section h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    .app-features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      margin: 4rem 0;
+      margin-bottom: 3rem;
     }
 
     .feature {
       background: var(--background-color);
-      padding: 2.5rem;
+      padding: 2.5rem 2rem;
       border-radius: 24px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.06);
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       opacity: 0;
       transform: translateY(50px);
       animation: slideInUp 0.8s ease-out forwards;
+      text-align: center;
     }
 
-    .feature:nth-child(1) { animation-delay: 0.1s; }
-    .feature:nth-child(2) { animation-delay: 0.2s; }
-    .feature:nth-child(3) { animation-delay: 0.3s; }
-    .feature:nth-child(4) { animation-delay: 0.4s; }
+    .app-features .feature:nth-child(1) { animation-delay: 0.1s; }
+    .app-features .feature:nth-child(2) { animation-delay: 0.2s; }
+    .app-features .feature:nth-child(3) { animation-delay: 0.3s; }
+    .app-features .feature:nth-child(4) { animation-delay: 0.4s; }
 
     @keyframes slideInUp {
       to {
@@ -171,6 +195,7 @@
       color: var(--secondary-color);
       margin: 0;
       line-height: 1.6;
+      font-size: 1.05rem;
     }
 
     .downloads {
@@ -285,6 +310,10 @@
       header {
         padding: 4rem 1rem 3rem;
       }
+
+      .app-features {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -298,26 +327,53 @@
   <div class="container">
     <section class="intro">
       <h2>Junseo Lee가 개발한 두 앱으로 대학 생활을 스마트하게</h2>
-      <p>P-CAL은 PLATO 시스템과 연동해 과제 마감과 학사 일정을 자동 관리하며, Plato Calendar는 학교 캘린더와 Google Calendar를 통합해 일상을 체계적으로 정리합니다. 바쁜 부산대 학생들을 위해 특별히 설계된 이 두 앱을 함께 사용하세요!</p>
-      <p class="developer-note">하나의 개발자가 만든 완벽한 컴패니언 앱 – 둘 다 다운로드하고 시너지 효과를 느껴보세요.</p>
+      <p>P-CAL과 Plato Calendar는 하나의 개발자가 만든 완벽한 컴패니언 앱입니다. P-CAL은 PLATO 시스템과 연동해 과제와 학사 일정을 자동 관리하고, Plato Calendar는 학교 캘린더와 Google Calendar를 통합해 일상을 체계적으로 정리합니다. 함께 사용하면 부산대 생활이 훨씬 수월해집니다!</p>
+      <p class="developer-note">둘 다 다운로드하고 시너지 효과를 느껴보세요.</p>
     </section>
 
-    <section class="features">
-      <div class="feature">
-        <h3>플라토 마감기한 자동 업로드 (P-CAL)</h3>
-        <p>더 이상 일일이 일정 등록하지 않아도 됩니다. 플라토에서 마감 정보를 자동으로 가져와 캘린더에 반영합니다.</p>
+    <section class="app-section">
+      <h2>P-CAL</h2>
+      <p style="text-align: center; font-size: 1.2rem; color: var(--secondary-color); max-width: 800px; margin: 0 auto 4rem;">PNU의 PLATO 시스템과 연동하여 과제와 강의 마감기한을 자동으로 캘린더에 업로드해주며, 알림 기능까지 제공해 바쁜 대학 생활을 체계적으로 관리할 수 있습니다.</p>
+      <div class="app-features">
+        <div class="feature">
+          <h3>플라토 마감기한 자동 업로드</h3>
+          <p>더 이상 일일이 일정 등록하지 않아도 됩니다. 플라토에서 마감 정보를 자동으로 가져와 캘린더에 반영합니다.</p>
+        </div>
+        <div class="feature">
+          <h3>알림 기능</h3>
+          <p>일정 마감 알림 기능으로 까먹지 않고 챙길 수 있습니다.</p>
+        </div>
+        <div class="feature">
+          <h3>학식 정보 제공</h3>
+          <p>오늘의 학식을 손쉽게 확인하세요! 교내 식당 메뉴를 빠르게 확인할 수 있습니다.</p>
+        </div>
+        <div class="feature">
+          <h3>부산대 학사 일정 확인</h3>
+          <p>개강일, 종강일, 수강신청 기간, 휴학·복학 신청, 시험 기간 등 공식 학사 일정을 앱에서 바로 확인할 수 있습니다.</p>
+        </div>
       </div>
-      <div class="feature">
-        <h3>알림 기능 (P-CAL)</h3>
-        <p>일정 마감 알림 기능으로 까먹지 않고 챙길 수 있습니다.</p>
-      </div>
-      <div class="feature">
-        <h3>학교 캘린더 자동 연동 (Plato Calendar)</h3>
-        <p>부산대학교 학사일정을 자동으로 가져와 사용자의 시간표와 통합하여 관리합니다.</p>
-      </div>
-      <div class="feature">
-        <h3>Google 캘린더 연동 & 알림 (Plato Calendar)</h3>
-        <p>Google Calendar와 동기화하여 일정을 추가, 수정, 삭제하며 iOS 알림으로 중요한 이벤트를 놓치지 않습니다.</p>
+    </section>
+
+    <section class="app-section">
+      <h2>Plato Calendar</h2>
+      <p style="text-align: center; font-size: 1.2rem; color: var(--secondary-color); max-width: 800px; margin: 0 auto 4rem;">당신의 학교 생활을 정리해주는 스마트 시간표 캘린더로, 부산대학교 학사일정을 자동 연동하고 Google Calendar와 동기화합니다.</p>
+      <div class="app-features">
+        <div class="feature">
+          <h3>학교 캘린더 자동 연동</h3>
+          <p>부산대학교 학사일정을 자동으로 가져와 사용자의 시간표와 통합하여 관리합니다.</p>
+        </div>
+        <div class="feature">
+          <h3>Google 캘린더 연동</h3>
+          <p>Google Calendar와 동기화하여 일정을 추가, 수정, 삭제하며 중요한 이벤트를 놓치지 않습니다.</p>
+        </div>
+        <div class="feature">
+          <h3>깔끔한 UI</h3>
+          <p>직관적이고 사용자 친화적인 인터페이스로 누구나 쉽게 일정을 관리할 수 있습니다.</p>
+        </div>
+        <div class="feature">
+          <h3>알림 지원</h3>
+          <p>iOS 알림센터를 통해 오늘의 일정을 빠르게 확인하고, 중요한 일정에 대한 알림을 받습니다.</p>
+        </div>
       </div>
     </section>
 
