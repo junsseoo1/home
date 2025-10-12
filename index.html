@@ -1,149 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Plato Calendar</title>
+  <title>P-CAL & Plato Calendar - 부산대학교 학생을 위한 필수 앱</title>
   <style>
+    :root {
+      --primary-color: #0071e3;
+      --secondary-color: #86868b;
+      --background-color: #ffffff;
+      --text-color: #1d1d1f;
+      --light-gray: #f5f5f7;
+      --border-color: #d2d2d7;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #333;
+      background: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.4;
+      overflow-x: hidden;
     }
 
     header {
-      background: #4a90e2;
-      color: white;
-      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      padding: 6rem 1rem 4rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(0, 113, 227, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.05) 0%, transparent 50%);
+      animation: headerGlow 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes headerGlow {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
     }
 
     header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+      margin: 0 0 0.5rem;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease-out;
     }
 
     header p {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
+      margin: 0;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--secondary-color);
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .container {
-      max-width: 900px;
-      margin: 2rem auto;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 0 1rem;
     }
 
-    .features, .data-usage {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .feature, .data-item {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    .feature h3, .data-item h3 {
-      margin-top: 0;
-    }
-
-    .screenshots {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-      justify-content: center;
-    }
-
-    .screenshots img {
-      width: 200px;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
-
-    .download {
+    .intro {
       text-align: center;
-      margin-top: 3rem;
+      padding: 4rem 1rem;
+      background: var(--light-gray);
+      border-radius: 24px;
+      margin: 2rem 0;
+      animation: fadeIn 1.5s ease-out;
     }
 
-    .download a {
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .intro h2 {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 600;
+      margin: 0 0 1rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .intro p {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    .intro .developer-note {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-top: 1rem;
+      animation: fadeInUp 1s ease-out 0.7s both;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .feature {
+      background: var(--background-color);
+      padding: 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .feature:nth-child(1) { animation-delay: 0.1s; }
+    .feature:nth-child(2) { animation-delay: 0.2s; }
+    .feature:nth-child(3) { animation-delay: 0.3s; }
+    .feature:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feature:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 64px rgba(0,0,0,0.12);
+    }
+
+    .feature h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      color: var(--text-color);
+    }
+
+    .feature p {
+      color: var(--secondary-color);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .downloads {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: linear-gradient(135deg, var(--light-gray) 0%, #f8f8f9 100%);
+      border-radius: 24px;
+      margin: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .downloads::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 113, 227, 0.05) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .downloads h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin: 0 0 2rem;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .download-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .download-btn {
       display: inline-block;
-      background: #4a90e2;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 6px;
+      background: var(--primary-color);
+      color: var(--background-color);
+      padding: 1.2rem 2.5rem;
+      border-radius: 16px;
       text-decoration: none;
-      font-size: 1rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 8px 24px rgba(0, 113, 227, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    .download-btn.secondary {
+      background: var(--secondary-color);
+      box-shadow: 0 8px 24px rgba(134, 134, 139, 0.3);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .download-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4);
+    }
+
+    .download-btn.secondary:hover {
+      box-shadow: 0 12px 32px rgba(134, 134, 139, 0.4);
     }
 
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      color: #777;
-      font-size: 0.9rem;
+      padding: 4rem 1rem;
+      color: var(--secondary-color);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
     }
 
     footer a {
-      color: #4a90e2;
+      color: var(--primary-color);
       text-decoration: none;
       margin: 0 0.5rem;
+      transition: color 0.3s ease;
     }
 
     footer a:hover {
+      color: #005bb5;
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .download-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .download-btn {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      header {
+        padding: 4rem 1rem 3rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Plato Calendar</h1>
-    <p>당신의 학교 생활을 정리해주는 스마트 시간표 캘린더</p>
+    <h1>P-CAL & Plato Calendar</h1>
+    <p>부산대학교 학생을 위한 필수 앱 컬렉션</p>
   </header>
 
   <div class="container">
+    <section class="intro">
+      <h2>Junseo Lee가 개발한 두 앱으로 대학 생활을 스마트하게</h2>
+      <p>P-CAL은 PLATO 시스템과 연동해 과제 마감과 학사 일정을 자동 관리하며, Plato Calendar는 학교 캘린더와 Google Calendar를 통합해 일상을 체계적으로 정리합니다. 바쁜 부산대 학생들을 위해 특별히 설계된 이 두 앱을 함께 사용하세요!</p>
+      <p class="developer-note">하나의 개발자가 만든 완벽한 컴패니언 앱 – 둘 다 다운로드하고 시너지 효과를 느껴보세요.</p>
+    </section>
+
     <section class="features">
       <div class="feature">
-        <h3>학교 캘린더 자동 연동</h3>
+        <h3>플라토 마감기한 자동 업로드 (P-CAL)</h3>
+        <p>더 이상 일일이 일정 등록하지 않아도 됩니다. 플라토에서 마감 정보를 자동으로 가져와 캘린더에 반영합니다.</p>
+      </div>
+      <div class="feature">
+        <h3>알림 기능 (P-CAL)</h3>
+        <p>일정 마감 알림 기능으로 까먹지 않고 챙길 수 있습니다.</p>
+      </div>
+      <div class="feature">
+        <h3>학교 캘린더 자동 연동 (Plato Calendar)</h3>
         <p>부산대학교 학사일정을 자동으로 가져와 사용자의 시간표와 통합하여 관리합니다.</p>
       </div>
       <div class="feature">
-        <h3>Google 캘린더 연동</h3>
-        <p>Google Calendar와 동기화하여 일정을 추가, 수정, 삭제하며 중요한 이벤트를 놓치지 않습니다.</p>
-      </div>
-      <div class="feature">
-        <h3>깔끔한 UI</h3>
-        <p>직관적이고 사용자 친화적인 인터페이스로 누구나 쉽게 일정을 관리할 수 있습니다.</p>
-      </div>
-      <div class="feature">
-        <h3>알림 지원</h3>
-        <p>iOS 알림센터를 통해 오늘의 일정을 빠르게 확인하고, 중요한 일정에 대한 알림을 받습니다.</p>
+        <h3>Google 캘린더 연동 & 알림 (Plato Calendar)</h3>
+        <p>Google Calendar와 동기화하여 일정을 추가, 수정, 삭제하며 iOS 알림으로 중요한 이벤트를 놓치지 않습니다.</p>
       </div>
     </section>
 
-    <section class="data-usage">
-      <h2 style="text-align: center;">데이터 사용 투명성</h2>
-      <div class="data-item">
-        <h3>Google Calendar 데이터</h3>
-        <p>Google Calendar 연동 기능을 사용 시, 일정 데이터를 읽고 수정하기 위해 접근 권한을 요청합니다. 모든 데이터는 사용자의 기기 내에서 처리되며 외부로 전송되지 않습니다.</p>
-      </div>
-      <div class="data-item">
-        <h3>앱 성능 데이터</h3>
-        <p>앱의 안정성 향상을 위해 비정상 종료 로그 및 성능 데이터를 수집합니다. 이 데이터는 개인 식별 정보가 포함되지 않으며, 오류 수정 후 즉시 삭제됩니다.</p>
+    <section class="downloads">
+      <h2>지금 두 앱 모두 다운로드하세요</h2>
+      <div class="download-buttons">
+        <a href="https://apps.apple.com/kr/app/p-cal/id6744305478" class="download-btn">P-CAL 다운로드</a>
+        <a href="https://apps.apple.com/kr/app/plato-%EC%BA%98%EB%A6%B0%EB%8D%94/id6744305477" class="download-btn secondary">Plato Calendar 다운로드</a>
       </div>
     </section>
-
-    <div class="download">
-      <h2>지금 다운로드하세요</h2>
-      <a href="https://apps.apple.com/kr/app/plato-%EC%BA%98%EB%A6%B0%EB%8D%94/id6744305477">앱 다운로드</a>
-    </div>
   </div>
 
   <footer>
@@ -155,4 +339,3 @@
 
 </body>
 </html>
-
